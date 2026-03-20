@@ -1,23 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\AboutSettingController;
-use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FaqController;
-use App\Http\Controllers\Admin\HomeHeroController;
-use App\Http\Controllers\Admin\HomeIntroController;
-use App\Http\Controllers\Admin\ListingController;
-use App\Http\Controllers\Admin\LocationController;
+use App\Http\Controllers\Admin\GalleryImageController;
+use App\Http\Controllers\Admin\GalleryVideoController;
 use App\Http\Controllers\Admin\LogoutController;
-use App\Http\Controllers\Admin\MandalController;
-use App\Http\Controllers\Admin\MandalMemberController;
-use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ProfileSettingController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\ContactController;
-use App\Http\Controllers\Admin\WhySettingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -71,44 +60,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('/profile-setting', ProfileSettingController::class);
         Route::post('/resetpassword', [ProfileSettingController::class, 'resetPassword'])->name('reset.password');
 
-        Route::resource('locations', LocationController::class);
-
-        Route::resource('categories', CategoryController::class);
-        Route::resource('subcategories', SubCategoryController::class)->names('subcategories');
-
-        Route::resource('mandals', MandalController::class)->names('mandals');
-
-        Route::resource('listings', ListingController::class);
-        Route::get('get-subcategories/{category_id}', [ListingController::class, 'getSubCategories'])->name('get.subcategories');
-
-        Route::resource('mandal-members', MandalMemberController::class)->names('mandal-members');
+        Route::resource('gallery-images', GalleryImageController::class);
+        Route::resource('gallery-videos', GalleryVideoController::class);
 
         Route::resource('faqs', FaqController::class)->names('faqs');
 
-        Route::resource('blogs', BlogController::class)->names('blogs');
-
         Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
         Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
-
-        Route::get('/settings', [SettingController::class, 'edit'])->name('settings.edit');
-        Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
-
-        Route::get('about-settings', [AboutSettingController::class, 'edit'])->name('about.edit');
-        Route::post('about-settings', [AboutSettingController::class, 'update'])->name('about.update');
-
-        Route::get('why-settings', [WhySettingController::class, 'edit'])->name('why.edit');
-        Route::post('why-settings', [WhySettingController::class, 'update'])->name('why.update');
-        Route::post('why-benefit/store', [WhySettingController::class, 'storeBenefit'])->name('why.benefit.store');
-        Route::get('why-benefit/delete/{id}', [WhySettingController::class, 'deleteBenefit'])->name('why.benefit.delete');
-        Route::post('why-benefit-update', [WhySettingController::class, 'updateBenefit'])->name('why.benefit.update');
-
-        Route::resource('pages', PageController::class);
-
-        Route::get('home-intro', [HomeIntroController::class, 'edit'])->name('home-intro.edit');
-        Route::post('home-intro', [HomeIntroController::class, 'update'])->name('home-intro.update');
-
-        Route::get('admin/home-hero', [HomeHeroController::class, 'edit'])->name('home-hero.edit');
-        Route::post('admin/home-hero', [HomeHeroController::class, 'update'])->name('home-hero.update');
 
         Route::get('/logout', [LogoutController::class, 'logout']);
 

@@ -23,36 +23,12 @@ class FrontController extends Controller
 {
     public function home(Request $request)
     {
-        $query = Listing::with(['category', 'location'])
-            ->where('status', 1);
-
-        // location filter
-        if ($request->location) {
-            $query->where('location_id', $request->location);
-        }
-
-        $listings = $query->latest()
-            ->take(4)
-            ->get();
-
         $faqs = Faq::where('status', 1)
             ->where('show_home', 1)
             ->latest()
             ->get();
 
-        $popularCategories = Category::withCount('listings')
-            ->where('is_popular', 1)
-            ->where('status', 1)
-            ->take(6)
-            ->get();
-
-        $categories = Category::where('status', 1)->get();
-
-        $locations = Location::get();
-        $homeSection = \App\Models\HomeSection::first();
-        $hero = \App\Models\HomeHero::first();
-
-        return view('front-pages.home', compact('listings', 'faqs', 'categories', 'popularCategories', 'locations', 'homeSection','hero'));
+        return view('front-pages.home', compact( 'faqs'));
     }
 
     public function searchListings(Request $request)

@@ -1,408 +1,459 @@
 @extends('layouts.app')
 
-<style>
-.hero-bg {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url('{{ $hero && $hero->background_image 
-        ? asset('storage/'.$hero->background_image) 
-        : 'https://picsum.photos/id/1015/1920/600' }}') center/cover;
-}
-</style>
-
 @section('content')
 
-    <!-- HERO -->
-    <div class="hero-bg h-[380px] flex items-center text-white">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-5xl font-bold mb-4 leading-tight">{{ $hero->title ?? 'बयेपुर का अपना बाज़ार'}}</h2>
-            <p class="text-xl max-w-2xl mx-auto">{{ $hero->subtitle ?? 'अपने गांव के व्यापारियों से सीधे जुड़ें। खोजें, कॉल करें, ऑर्डर करें – सब
-                    कुछ एक क्लिक में।'}}</p>
-            <div class="mt-8 flex justify-center gap-4">
-                <button onclick="document.getElementById('listings-section').scrollIntoView({behavior:'smooth'})"
-                    class="bg-orange-600 hover:bg-orange-700 px-10 py-4 rounded-3xl text-lg font-semibold shadow-lg">
-                    {{ $hero->button_text ?? 'अभी खोजें'}}
-                </button>
+    <!-- HERO CAROUSEL -->
+    <section id="home" class="hero-carousel">
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <!-- Sparkle Container -->
+            <div id="sparkles" class="position-absolute w-100 h-100" style="top:0; left:0; z-index:3; overflow:hidden;">
+            </div>
+
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active" style="background-image: url('https://picsum.photos/id/1015/1920/1080');">
+                    <div class="hero-overlay position-absolute w-100 h-100 d-flex align-items-center">
+                        <div class="container text-white">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <h1 class="display-3 fw-bold hero-text mb-3"
+                                        style="text-shadow: 0 5px 30px rgba(0,0,0,0.6);">
+                                        Make Your Party<br><span class="text-warning">MAGICAL</span> 🎉
+                                    </h1>
+                                    <p class="lead mb-4 fs-4" style="text-shadow: 0 3px 15px rgba(0,0,0,0.6);">
+                                        India's Most Premium Theme Party Planner &amp; Balloon Decoration
+                                    </p>
+                                    <div class="d-flex gap-3 flex-wrap">
+                                        <a href="#contact" class="btn magic-btn btn-lg px-5 py-3">Book Your Magic Now</a>
+                                        <a href="#services" class="btn btn-outline-light btn-lg px-5 py-3 border-2">Explore
+                                            Services</a>
+                                    </div>
+                                    <div class="mt-5 d-flex gap-4 text-white-50">
+                                        <div><i class="fa-solid fa-star"></i> 500+ Happy Parties</div>
+                                        <div><i class="fa-solid fa-clock"></i> On-time Delivery</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item" style="background-image: url('https://picsum.photos/id/201/1920/1080');">
+                    <div class="hero-overlay position-absolute w-100 h-100 d-flex align-items-center">
+                        <div class="container text-white">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <h1 class="display-3 fw-bold hero-text mb-3"
+                                        style="text-shadow: 0 5px 30px rgba(0,0,0,0.6);">
+                                        Balloons that<br>Steal the Show ✨
+                                    </h1>
+                                    <p class="lead mb-4 fs-4">Custom Themes • Premium Balloons • Unforgettable Moments</p>
+                                    <a href="#packages" class="btn magic-btn btn-lg px-5 py-3">Choose Your Package</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item" style="background-image: url('https://picsum.photos/id/870/1920/1080');">
+                    <div class="hero-overlay position-absolute w-100 h-100 d-flex align-items-center">
+                        <div class="container text-white">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <h1 class="display-3 fw-bold hero-text mb-3"
+                                        style="text-shadow: 0 5px 30px rgba(0,0,0,0.6);">
+                                        From 1st Birthday<br>to Grand Weddings
+                                    </h1>
+                                    <p class="lead mb-4 fs-4">Every celebration deserves magic!</p>
+                                    <a href="#gallery" class="btn magic-btn btn-lg px-5 py-3">See Our Magic</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- SUB CATEGORIES -->
-    <div class="max-w-7xl mx-auto px-6 py-8">
-        <h3 class="text-xl font-semibold mb-5 text-gray-800">लोकप्रिय श्रेणियाँ</h3>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-
-            @foreach($popularCategories as $category)
-
-                <div onclick="window.location='{{ route('listing', ['category' => $category->slug]) }}'"
-                    class="bg-white border border-gray-200 rounded-2xl p-4 flex items-center gap-4 cursor-pointer hover:border-teal-300 transition">
-
-                    @if($category->image)
-                        <img src="{{ asset('storage/' . $category->image) }}" class="w-12 h-12 object-cover rounded-lg">
-                    @else
-                        <i class="fa-solid fa-layer-group text-3xl text-teal-500"></i>
-                    @endif
-
-                    <div>
-                        <p class="font-medium">{{ $category->name }}</p>
-
-                        <p class="text-xs text-gray-500">
-                            {{ $category->listings_count }} दुकानें
-                        </p>
+    <!-- INTRODUCTION / ABOUT -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <div class="position-relative">
+                        <img src="https://picsum.photos/id/1016/800/900" class="img-fluid rounded-4 shadow-lg"
+                            alt="Magician Badshah">
+                        <div class="position-absolute bottom-0 start-0 bg-white p-4 rounded-4 shadow glass m-4">
+                            <h4 class="text-primary mb-0">15+ Years</h4>
+                            <p class="small text-muted">Creating Magical Moments</p>
+                        </div>
                     </div>
-
                 </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title  fw-bold mb-4">We Turn Dreams Into Reality</h2>
+                    <p class="lead text-muted mb-4">
+                        Welcome to Magician Badshah – Delhi's most loved theme party planner &amp; balloon decoration
+                        experts.
+                        From enchanting birthday themes to grand wedding setups, we bring the wow factor to every
+                        celebration.
+                    </p>
 
-            @endforeach
-
-        </div>
-    </div>
-
-    <!-- FEATURED LISTINGS -->
-    <div id="listings-section" class="max-w-7xl mx-auto px-6 py-12 bg-white">
-        <div class="flex justify-between items-end mb-8">
-            <h3 class="text-3xl font-bold text-gray-800">विशेष लिस्टिंग्स</h3>
-
-            <a href="{{ route('listing') }}" class="text-teal-600 font-medium flex items-center gap-1 hover:underline">
-                सभी देखें <i class="fa-solid fa-arrow-right"></i>
-            </a>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-
-            @forelse($listings as $listing)
-
-                <div class="listing-card bg-white border border-gray-200 rounded-3xl overflow-hidden">
-
-                    <div class="h-48 bg-gray-100 flex items-center justify-center relative">
-
-                        <img src="{{ $listing->image
-                ? asset('storage/' . $listing->image)
-                : asset('images/no-image.png') }}" alt="{{ $listing->business_name }}"
-                            class="h-full w-full object-cover">
-
-                        <div
-                            class="absolute top-4 right-4 bg-white text-teal-600 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow">
-                            <i class="fa-solid fa-circle-check"></i>
-                            सत्यापित
+                    <div class="row g-4 mt-4">
+                        <div class="col-4 text-center">
+                            <div class="display-4 fw-bold text-primary">15+</div>
+                            <p class="small text-uppercase">Years Experience</p>
+                        </div>
+                        <div class="col-4 text-center">
+                            <div class="display-4 fw-bold text-primary">850+</div>
+                            <p class="small text-uppercase">Happy Clients</p>
+                        </div>
+                        <div class="col-4 text-center">
+                            <div class="display-4 fw-bold text-primary">1200+</div>
+                            <p class="small text-uppercase">Events Completed</p>
                         </div>
                     </div>
 
-                    <div class="p-6">
-
-                        <div class="row">
-                            <h4 class="col-12 font-semibold text-xl">
-                                {{ $listing->business_name }}
-                            </h4>
-
-                            <span class="col-12 text-xs bg-teal-100 text-teal-700 px-3 py-1 rounded-full">
-                                {{ $listing->category->name ?? '' }}
-                            </span>
-                        </div>
-
-                        <p class="text-gray-600 text-sm mt-2 line-clamp-2">
-                            {{ $listing->short_description }}
-                        </p>
-
-                        <div class="mt-4 flex items-center gap-2 text-xs text-gray-500">
-                            <i class="fa-solid fa-location-dot"></i>
-
-                            <span>
-                                {{ $listing->address }}
-                            </span>
-                        </div>
-
-                        <div class="mt-6 flex gap-3">
-
-                            <a href="tel:{{ $listing->mobile }}"
-                                class="flex-1 bg-teal-600 text-white py-3 rounded-2xl text-center font-medium flex items-center justify-center gap-2">
-
-                                <i class="fa-solid fa-phone"></i> कॉल करें
-                            </a>
-
-                            <a href="https://wa.me/91{{ $listing->whatsapp }}" target="_blank"
-                                class="flex-1 bg-green-500 text-white py-3 rounded-2xl text-center font-medium flex items-center justify-center gap-2">
-
-                                <i class="fa-brands fa-whatsapp"></i> व्हाट्सएप
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            @empty
-
-                </div>
-
-                <div class="text-center">
-                    <div class="border-2 border-[rgb(13,148,136)] rounded-2xl p-12 max-w-3xl mx-auto">
-
-                        <p class="text-gray-600 text-lg">
-                            No Data found under this Location.
-                        </p>
-
-                        <p class="text-gray-500 mt-2">
-                            Please try with another Location
-                        </p>
-
-                    </div>
-
-                    <a href="{{ route('listing')}}"
-                        class="inline-block mt-8 px-8 py-4 rounded-full font-semibold text-white
-                                                                                                    bg-[rgb(13,148,136)] hover:bg-[rgb(15,118,110)] transition">
-
-                        View All Listings →
-                    </a>
-
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-
-            @endforelse
-
-        </div>
-    </div>
-
-    <!-- ABOUT COMPANY -->
-    @if($homeSection)
-        <div class="bg-teal-50 py-16">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-
-                    <!-- LEFT CONTENT -->
-                    <div>
-                        <h2 class="text-4xl font-bold text-teal-800 mb-6">
-                            {{ $homeSection->title }}
-                        </h2>
-
-                        <p class="text-lg leading-relaxed text-gray-700">
-                            {!! $homeSection->description !!}
-                        </p>
-
-                        <div class="mt-8 grid grid-cols-3 gap-6">
-
-                            <!-- STAT 1 -->
-                            <div class="text-center">
-                                <div class="text-4xl font-bold text-teal-600">
-                                    {{ $homeSection->stat_1 }}
-                                </div>
-                                <div class="text-sm text-gray-600 mt-1">
-                                    {{ $homeSection->stat_1_label }}
-                                </div>
-                            </div>
-
-                            <!-- STAT 2 -->
-                            <div class="text-center">
-                                <div class="text-4xl font-bold text-teal-600">
-                                    {{ $homeSection->stat_2 }}
-                                </div>
-                                <div class="text-sm text-gray-600 mt-1">
-                                    {{ $homeSection->stat_2_label }}
-                                </div>
-                            </div>
-
-                            <!-- STAT 3 -->
-                            <div class="text-center">
-                                <div class="text-4xl font-bold text-teal-600">
-                                    {{ $homeSection->stat_3 }}
-                                </div>
-                                <div class="text-sm text-gray-600 mt-1">
-                                    {{ $homeSection->stat_3_label }}
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- RIGHT IMAGE -->
-                    <div class="bg-white p-8 rounded-3xl shadow-inner">
-                        <img src="{{ $homeSection->image
-                ? asset('storage/' . $homeSection->image)
-                : 'https://picsum.photos/id/1016/600/400' }}" alt="about" class="rounded-2xl w-full h-auto">
-                    </div>
-
+                    <a href="#contact" class="btn magic-btn mt-4 px-5">Let's Plan Your Party</a>
                 </div>
             </div>
         </div>
-    @endif
+    </section>
 
-    <!-- ABOUT BAYEPUR -->
-    <div class="max-w-7xl mx-auto px-6 py-16">
-        <h2 class="text-4xl font-bold text-center mb-8 text-gray-800">बयेपुर के बारे में</h2>
-        <div class="max-w-3xl mx-auto text-center text-lg leading-relaxed text-gray-700">
-            बयेपुर घाज़ीपुर जिले का एक छोटा लेकिन समृद्ध गांव है। यहाँ की मुख्य अर्थव्यवस्था कृषि पर आधारित है। गेहूँ, धान,
-            आलू और सब्जियों की खेती यहां प्रमुख है।
-            गांव में अच्छी सड़कें, स्कूल, क्लिनिक और छोटे बाजार हैं। बयेपुर के लोग मेहनती, मेहमाननवाज़ और प्रगतिशील हैं।
-            हमारा प्लेटफॉर्म इसी गांव को डिजिटल रूप से सशक्त बनाने का प्रयास है।
-        </div>
-    </div>
+    <!-- SERVICES -->
+    <section id="services" class="py-5 bg-white">
+        <div class="container">
+            <div class="text-center mb-5">
+                <!-- <span class="badge bg-warning text-dark px-4 py-2 rounded-pill">Our Specialities</span> -->
+                <h2 class="section-title  fw-bold mt-3">Magical Services</h2>
+            </div>
 
-    <!-- HIGHLIGHTS -->
-    <div class="bg-white py-16 border-t border-b">
-        <div class="max-w-7xl mx-auto px-6">
-            <h3 class="text-3xl font-bold text-center mb-12">हमारे हाइलाइट्स</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="text-center">
-                    <div class="w-20 h-20 mx-auto bg-teal-100 rounded-2xl flex items-center justify-center text-4xl">📍
+            <div class="row g-4">
+                <!-- Card 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card glass h-100 p-4 text-center">
+                        <i class="fa-solid fa-birthday-cake fa-4x text-primary mb-4"></i>
+                        <h4>Birthday Themes</h4>
+                        <p class="text-muted">Superhero, Princess, Unicorn &amp; more – fully customized themes for kids
+                            &amp; adults</p>
                     </div>
-                    <h4 class="font-semibold mt-6 text-xl">स्थानीय फोकस</h4>
-                    <p class="text-sm text-gray-600 mt-3">केवल बयेपुर और आसपास के क्षेत्र</p>
                 </div>
-                <div class="text-center">
-                    <div class="w-20 h-20 mx-auto bg-orange-100 rounded-2xl flex items-center justify-center text-4xl">✅
+                <!-- Card 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card glass h-100 p-4 text-center">
+                        <i class="fa-solid fa-baby fa-4x text-primary mb-4"></i>
+                        <h4>Baby Shower</h4>
+                        <p class="text-muted">Elegant gender reveal &amp; baby shower decorations with premium balloons</p>
                     </div>
-                    <h4 class="font-semibold mt-6 text-xl">सत्यापित लिस्टिंग</h4>
-                    <p class="text-sm text-gray-600 mt-3">हर व्यापारी की पुष्टि की जाती है</p>
                 </div>
-                <div class="text-center">
-                    <div class="w-20 h-20 mx-auto bg-green-100 rounded-2xl flex items-center justify-center text-4xl">📞
+                <!-- Card 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card glass h-100 p-4 text-center">
+                        <i class="fa-solid fa-ring fa-4x text-primary mb-4"></i>
+                        <h4>Wedding &amp; Engagement</h4>
+                        <p class="text-muted">Luxury floral &amp; balloon setups for your dream day</p>
                     </div>
-                    <h4 class="font-semibold mt-6 text-xl">सीधा संपर्क</h4>
-                    <p class="text-sm text-gray-600 mt-3">कॉल और व्हाट्सएप बटन</p>
                 </div>
-                <div class="text-center">
-                    <div class="w-20 h-20 mx-auto bg-purple-100 rounded-2xl flex items-center justify-center text-4xl">🚀
+                <!-- Card 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card glass h-100 p-4 text-center">
+                        <i class="fa-solid fa-balloons fa-4x text-primary mb-4"></i>
+                        <h4>Balloon Decoration</h4>
+                        <p class="text-muted">Organic arches, helium towers, photo booths &amp; magical installations</p>
                     </div>
-                    <h4 class="font-semibold mt-6 text-xl">मुफ्त रजिस्ट्रेशन</h4>
-                    <p class="text-sm text-gray-600 mt-3">व्यापारियों के लिए पूरी तरह फ्री</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card glass h-100 p-4 text-center">
+                        <i class="fa-solid fa-cake-candles fa-4x text-primary mb-4"></i>
+                        <h4>Corporate Events</h4>
+                        <p class="text-muted">Product launches, team celebrations &amp; festive office parties</p>
+                    </div>
+                </div>
+                <!-- Card 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card glass h-100 p-4 text-center">
+                        <i class="fa-solid fa-wand-magic-sparkles fa-4x text-primary mb-4"></i>
+                        <h4>Custom Themes</h4>
+                        <p class="text-muted">Any theme you imagine – we create it with love &amp; magic</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- FAQ -->
-    <div class="max-w-4xl mx-auto px-6 py-16">
-        <h3 class="text-3xl font-bold text-center mb-10">अक्सर पूछे जाने वाले सवाल</h3>
-
-        @foreach($faqs as $faq)
-
-            <details class="mb-4 bg-white rounded-3xl shadow-sm border">
-                <summary class="px-8 py-6 font-medium cursor-pointer flex justify-between items-center">
-                    {{ $faq->question }}
-                </summary>
-
-                <div class="px-8 pb-8 text-gray-600">
-                    {{ $faq->answer }}
+    <!-- FEATURES -->
+    <section class="py-5" style="background: linear-gradient(135deg, #6a1b9a, #e91e63); color: white;">
+        <div class="container">
+            <div class="row text-center g-5">
+                <div class="col-md-3">
+                    <i class="fa-solid fa-rupee-sign fa-3x mb-3"></i>
+                    <h5>Affordable Luxury</h5>
+                    <p>Premium experience that won't break the bank</p>
                 </div>
-            </details>
+                <div class="col-md-3">
+                    <i class="fa-solid fa-lightbulb fa-3x mb-3"></i>
+                    <h5>Creative Designs</h5>
+                    <p>Unique themes designed just for you</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fa-solid fa-clock fa-3x mb-3"></i>
+                    <h5>On-Time Magic</h5>
+                    <p>Setup &amp; delivery guaranteed before your event</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fa-solid fa-handshake fa-3x mb-3"></i>
+                    <h5>100% Satisfaction</h5>
+                    <p>Our promise – or we make it right</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        @endforeach
+    <!-- GALLERY -->
+    <section id="gallery" class="py-5 bg-white">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title  fw-bold">Moments We Created</h2>
+            </div>
 
-    </div>
+            <div class="row g-4" id="galleryGrid">
+                <!-- Populated by JS for demo -->
+            </div>
 
-    <!-- FORM -->
-    <div id="add-listing" class="bg-gradient-to-b from-teal-50 to-white py-16">
-
-        <div class="max-w-2xl mx-auto px-6">
-
-            <div class="bg-white rounded-3xl shadow-xl p-10">
-
-                <h3 class="text-3xl font-bold text-center mb-8">
-                    अपना बिजनेस लिस्ट करें
-                </h3>
-
-                @if(session('success'))
-                    <div class="bg-green-100 text-green-700 p-4 rounded mb-6 text-center">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
-                <form method="POST" action="{{ route('listing.submit') }}" class="space-y-6">
-
-                    @csrf
-
-                    <div>
-                        <label class="block text-sm font-medium mb-2">
-                            व्यवसाय का नाम
-                        </label>
-
-                        <input type="text" name="business_name" required
-                            class="w-full border border-gray-300 rounded-2xl px-6 py-4 outline-none focus:border-teal-500"
-                            placeholder="जैसे: राम किराना स्टोर">
-                    </div>
-
-
-                    <div class="grid grid-cols-2 gap-6">
-
-                        <div>
-                            <label class="block text-sm font-medium mb-2">
-                                मोबाइल नंबर
-                            </label>
-
-                            <input type="tel" name="mobile" required
-                                class="w-full border border-gray-300 rounded-2xl px-6 py-4 outline-none focus:border-teal-500"
-                                placeholder="9876543210">
+            <!-- Gallery Modal -->
+            <div class="modal fade" id="galleryModal" tabindex="-1">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                    <div class="modal-content border-0 bg-transparent">
+                        <div class="modal-body p-0 position-relative">
+                            <button type="button"
+                                class="btn-close position-absolute top-0 end-0 m-3 bg-white rounded-circle"
+                                data-bs-dismiss="modal"></button>
+                            <img id="modalImage" src="" class="img-fluid w-100 rounded-4" alt="">
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- VIDEOS -->
+    <section id="videos" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title  fw-bold text-dark">Live the Magic</h2>
+            </div>
 
-                        <div>
-                            <label class="block text-sm font-medium mb-2">
-                                श्रेणी
-                            </label>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow glass">
+                        <iframe src="https://www.youtube.com/embed/9f9p8v8oJ3A" title="Balloon Magic"
+                            allowfullscreen></iframe>
+                    </div>
+                    <p class="text-center mt-3 fw-bold">Balloon Surprise Setup</p>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow glass">
+                        <iframe src="https://www.youtube.com/embed/3vR0w3Y8i4E" title="Birthday Theme"
+                            allowfullscreen></iframe>
+                    </div>
+                    <p class="text-center mt-3 fw-bold">Princess Theme Reveal</p>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow glass">
+                        <iframe src="https://www.youtube.com/embed/2T4vL0X5zKk" title="Wedding Decor"
+                            allowfullscreen></iframe>
+                    </div>
+                    <p class="text-center mt-3 fw-bold">Elegant Wedding Entrance</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                            <select name="category_id" required
-                                class="w-full border border-gray-300 rounded-2xl px-6 py-4 outline-none focus:border-teal-500">
+    <!-- PACKAGES -->
+    <section id="packages" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title  fw-bold">Choose Your Magic Package</h2>
+            </div>
 
-                                <option value="">श्रेणी चुनें</option>
+            <div class="row g-4 justify-content-center">
+                <!-- Basic -->
+                <div class="col-lg-4">
+                    <div class="pricing-card glass p-5 text-center h-100">
+                        <h5 class="text-muted">BASIC</h5>
+                        <div class="display-4 fw-bold my-3">₹18,999</div>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2"><i class="fa-solid fa-check text-success"></i> 100 Balloons</li>
+                            <li class="mb-2"><i class="fa-solid fa-check text-success"></i> Basic Theme Setup</li>
+                            <li class="mb-2"><i class="fa-solid fa-check text-success"></i> 2 Hours Decoration</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline-primary w-100">Select Basic</a>
+                    </div>
+                </div>
 
-                                @foreach($categories as $category)
+                <!-- Standard (Popular) -->
+                <div class="col-lg-4">
+                    <div class="pricing-card popular glass p-5 text-center h-100">
+                        <h5 class="text-warning">STANDARD</h5>
+                        <div class="display-4 fw-bold my-3">₹29,999</div>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2"><i class="fa-solid fa-check text-success"></i> 300 Premium Balloons</li>
+                            <li class="mb-2"><i class="fa-solid fa-check text-success"></i> Full Theme + Backdrop</li>
+                            <li class="mb-2"><i class="fa-solid fa-check text-success"></i> Photo Booth + Lighting</li>
+                            <li class="mb-2"><i class="fa-solid fa-check text-success"></i> 4 Hours Setup</li>
+                        </ul>
+                        <a href="#contact" class="btn magic-btn w-100">Most Loved Package</a>
+                    </div>
+                </div>
 
-                                    <option value="{{ $category->id }}">
-                                        {{ $category->name }}
-                                    </option>
+                <!-- Premium -->
+                <div class="col-lg-4">
+                    <div class="pricing-card glass p-5 text-center h-100">
+                        <h5 class="text-muted">PREMIUM</h5>
+                        <div class="display-4 fw-bold my-3">₹49,999</div>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2"><i class="fa-solid fa-check text-success"></i> 500+ Balloons &amp; Helium</li>
+                            <li class="mb-2"><i class="fa-solid fa-check text-success"></i> Complete Custom Theme</li>
+                            <li class="mb-2"><i class="fa-solid fa-check text-success"></i> LED Lights + Smoke Machine</li>
+                            <li class="mb-2"><i class="fa-solid fa-check text-success"></i> Full Day Service</li>
+                            <li class="mb-2"><i class="fa-solid fa-check text-success"></i> Live Magician Show</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline-primary w-100">Go Premium</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                                @endforeach
-
+    <!-- CONTACT FORM -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <h2 class="display-4 fw-bold mb-4">Let's Create Magic Together!</h2>
+                    <form id="contactForm" class="glass p-5 rounded-4">
+                        <div class="mb-4">
+                            <input type="text" id="name" class="form-control form-control-lg border-0 glass"
+                                placeholder="Your Name" required>
+                        </div>
+                        <div class="mb-4">
+                            <input type="tel" id="phone" class="form-control form-control-lg border-0 glass"
+                                placeholder="Phone Number" required>
+                        </div>
+                        <div class="mb-4">
+                            <select id="eventType" class="form-select form-select-lg border-0 glass">
+                                <option value="">Event Type</option>
+                                <option value="Birthday">Birthday Party</option>
+                                <option value="BabyShower">Baby Shower</option>
+                                <option value="Wedding">Wedding / Engagement</option>
+                                <option value="Corporate">Corporate Event</option>
+                                <option value="Other">Other</option>
                             </select>
                         </div>
+                        <div class="mb-4">
+                            <textarea id="message" rows="5" class="form-control border-0 glass"
+                                placeholder="Tell us about your dream party..."></textarea>
+                        </div>
+                        <button type="submit" class="btn magic-btn w-100 py-3">Send Message – We'll Call You in 5
+                            Mins!</button>
+                    </form>
+                </div>
+
+                <div class="col-lg-6 d-flex align-items-center">
+                    <div class="text-white p-5 rounded-4 w-100"
+                        style="background: linear-gradient(135deg, #6a1b9a, #e91e63);">
+                        <h3 class="mb-4">Why Choose Us?</h3>
+                        <div class="d-flex align-items-center mb-4">
+                            <i class="fa-solid fa-check-circle fa-2x me-3"></i>
+                            <div>100% Custom Designs</div>
+                        </div>
+                        <div class="d-flex align-items-center mb-4">
+                            <i class="fa-solid fa-check-circle fa-2x me-3"></i>
+                            <div>Delhi-NCR Same Day Delivery</div>
+                        </div>
+                        <div class="d-flex align-items-center mb-4">
+                            <i class="fa-solid fa-check-circle fa-2x me-3"></i>
+                            <div>Expert Balloon Artists</div>
+                        </div>
+                        <div class="mt-5">
+                            <a href="tel:++ 91 - 9838457702" class="text-white fs-3 text-decoration-none">
+                                <i class="fa-solid fa-phone-volume"></i> + 91 - 9838457702
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION - Premium Card Style -->
+    <section class="py-5 py-lg-6">
+    <div class="container">
+        <h2 class="section-title fw-bold text-center mb-5 mb-lg-6">
+            Frequently Asked Questions
+        </h2>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-9 col-xl-8 faq-container">
+
+                @forelse($faqs as $index => $faq)
+
+                    <div class="faq-card glass mb-4 overflow-hidden">
+
+                        <div class="faq-header d-flex align-items-center justify-content-between p-4 p-lg-5"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faq{{ $index }}"
+                            aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
+                            role="button">
+
+                            <h5 class="mb-0 fw-semibold">
+                                {{ $faq->question }}
+                            </h5>
+
+                            <i class="fa-solid fa-plus fa-lg fa-fw fa-rotate-icon"></i>
+                        </div>
+
+                        <div id="faq{{ $index }}"
+                            class="collapse {{ $index == 0 ? 'show' : '' }}"
+                            data-bs-parent=".faq-container">
+
+                            <div class="faq-body px-4 px-lg-5 pb-4 pb-lg-5 pt-0">
+                                <p class="mb-0 text-white-75">
+                                    {!! $faq->answer !!}
+                                </p>
+                            </div>
+
+                        </div>
 
                     </div>
 
+                @empty
 
-                    <div>
-                        <label class="block text-sm font-medium mb-2">
-                            लोकेशन
-                        </label>
-
-                        <select name="location_id"
-                            class="w-full border border-gray-300 rounded-2xl px-6 py-4 outline-none focus:border-teal-500">
-
-                            @foreach($locations as $location)
-
-                                <option value="{{ $location->id }}">
-                                    {{ $location->location }}
-                                </option>
-
-                            @endforeach
-
-                        </select>
+                    <div class="text-center text-muted">
+                        No FAQs available
                     </div>
 
-
-                    <div>
-                        <label class="block text-sm font-medium mb-2">
-                            संक्षिप्त विवरण
-                        </label>
-
-                        <textarea name="short_description" required rows="3"
-                            class="w-full border border-gray-300 rounded-2xl px-6 py-4 outline-none focus:border-teal-500"
-                            placeholder="अपने व्यवसाय के बारे में 2-3 लाइन लिखें..."></textarea>
-                    </div>
-
-                    <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
-                    <button type="submit"
-                        class="w-full bg-gradient-to-r from-teal-600 to-orange-600 text-white py-5 rounded-3xl font-semibold text-lg hover:from-teal-700 hover:to-orange-700 transition">
-
-                        लिस्टिंग सबमिट करें
-
-                    </button>
-
-
-                </form>
+                @endforelse
 
             </div>
         </div>
     </div>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</section>
 @endsection
