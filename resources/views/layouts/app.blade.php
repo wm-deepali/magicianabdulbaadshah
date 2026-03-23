@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
     <title>
         @yield('title', 'Magician Badshah | Theme Party Planner & Balloon Magic')
     </title>
@@ -26,17 +25,25 @@
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-auto d-flex align-items-center gap-3">
-                    <a href="tel:++ 91 - 9838457702" class="text-white text-decoration-none">
-                        <i class="fa fa-phone me-2"></i> + 91 - 9838457702
+                    @php
+                        $contact = \App\Models\ContactPage::first();
+                    @endphp
+                    <a href="tel:{{ preg_replace('/[^0-9]/', '', $contact->phone ?? '') }}"
+                        class="text-white text-decoration-none">
+                        <i class="fa fa-phone me-2"></i> {{ $contact->phone ?? '' }}
                     </a>
-                    <a href="https://wa.me/+ 91 - 9838457702" target="_blank" class="text-white text-decoration-none">
+                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contact->whatsapp ?? '') }}" target="_blank"
+                        class="text-white text-decoration-none">
                         <i class="fa-brands fa-whatsapp me-2"></i> WhatsApp
                     </a>
                 </div>
                 <div class="col-auto">
-                    <a href="#" class="text-white mx-3"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="text-white mx-3"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="text-white mx-3"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="{{ $contact->facebook ?? '#' }}" class="text-white mx-3"><i
+                            class="fa-brands fa-facebook-f"></i></a>
+                    <a href="{{ $contact->instagram ?? '#' }}" class="text-white mx-3"><i
+                            class="fa-brands fa-instagram"></i></a>
+                    <a href="{{ $contact->youtube ?? '#' }}" class="text-white mx-3"><i
+                            class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
         </div>
@@ -45,7 +52,7 @@
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg sticky-top shadow-sm" id="mainNav">
         <div class="container">
-            <a class="navbar-brand logo" href="#">Magician Badshah</a>
+            <a class="navbar-brand logo" href="{{ url('/') }}">Magician Badshah</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -53,15 +60,15 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto gap-4">
-                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#videos">Videos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('services') }}">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('gallery') }}">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('gallery') }}">Videos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('packages') }}">Packages</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
                 </ul>
-                <a href="https://wa.me/+ 91 - 9838457702" target="_blank"
+                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contact->whatsapp ?? '') }}" target="_blank"
                     class="btn magic-btn ms-lg-4 d-none d-lg-block">
                     <i class="fa-brands fa-whatsapp"></i> Book Now
                 </a>
@@ -89,17 +96,14 @@
                         Delhi-NCR.
                     </p>
                     <div class="d-flex gap-4">
-                        <a href="#" class="text-white-50 hover-lift fs-4 transition-all">
+                        <a href="{{ $contact->facebook ?? '#' }}" class="text-white-50 hover-lift fs-4 transition-all">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="text-white-50 hover-lift fs-4 transition-all">
+                        <a href="{{ $contact->instagram ?? '#' }}" class="text-white-50 hover-lift fs-4 transition-all">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
-                        <a href="#" class="text-white-50 hover-lift fs-4 transition-all">
+                        <a href="{{ $contact->youtube ?? '#' }}"  class="text-white-50 hover-lift fs-4 transition-all">
                             <i class="fa-brands fa-youtube"></i>
-                        </a>
-                        <a href="#" class="text-white-50 hover-lift fs-4 transition-all">
-                            <i class="fa-brands fa-pinterest"></i>
                         </a>
                     </div>
                 </div>
@@ -108,42 +112,51 @@
                 <div class="col-lg-2 col-md-4">
                     <h5 class="fw-semibold mb-4 text-uppercase letter-spacing-1">Quick Links</h5>
                     <ul class="list-unstyled footer-links">
-                        <li class="mb-3"><a href="#home"
+                        <li class="mb-3"><a href="{{ url('/') }}"
                                 class="text-white-75 text-decoration-none hover-accent">Home</a></li>
-                        <li class="mb-3"><a href="#about" class="text-white-75 text-decoration-none hover-accent">About
+                        <li class="mb-3"><a href="{{ route('about') }}"
+                                class="text-white-75 text-decoration-none hover-accent">About
                                 Us</a></li>
-                        <li class="mb-3"><a href="#services"
+                        <li class="mb-3"><a href="{{ route('services') }}"
                                 class="text-white-75 text-decoration-none hover-accent">Services</a></li>
-                        <li class="mb-3"><a href="#gallery"
+                        <li class="mb-3"><a href="{{ route('gallery') }}"
                                 class="text-white-75 text-decoration-none hover-accent">Gallery</a></li>
-                        <li><a href="#contact" class="text-white-75 text-decoration-none hover-accent">Contact</a></li>
+                        <li><a href="{{ route('contact') }}"
+                                class="text-white-75 text-decoration-none hover-accent">Contact</a></li>
                     </ul>
                 </div>
 
                 <!-- Services -->
                 <div class="col-lg-2 col-md-4">
                     <h5 class="fw-semibold mb-4 text-uppercase letter-spacing-1">Our Services</h5>
+
                     <ul class="list-unstyled footer-links">
-                        <li class="mb-3"><a href="#" class="text-white-75 text-decoration-none hover-accent">Custom
-                                Themes</a></li>
-                        <li class="mb-3"><a href="#" class="text-white-75 text-decoration-none hover-accent">Balloon
-                                Artistry</a></li>
-                        <li class="mb-3"><a href="#" class="text-white-75 text-decoration-none hover-accent">Birthday
-                                Celebrations</a></li>
-                        <li class="mb-3"><a href="#" class="text-white-75 text-decoration-none hover-accent">Wedding &
-                                Engagement</a></li>
-                        <li><a href="#" class="text-white-75 text-decoration-none hover-accent">Corporate Events</a>
-                        </li>
+                        @php
+                            $services = \App\Models\Service::latest()->take(5)->get();
+                        @endphp
+                        @foreach($services->take(5) as $service)
+                            <li class="mb-3">
+                                <a href="{{ url('/services') }}" class="text-white-75 text-decoration-none hover-accent">
+                                    {{ $service->title }}
+                                </a>
+                            </li>
+                        @endforeach
+
                     </ul>
                 </div>
-
                 <!-- Contact & Newsletter -->
                 <div class="col-lg-4 col-md-4">
                     <h5 class="fw-semibold mb-4 text-uppercase letter-spacing-1">Get in Touch</h5>
-                    <p class="mb-3"><i class="fa-solid fa-phone-volume me-3 text-accent"></i> + 91 - 9838457702</p>
-                    <p class="mb-4"><i class="fa-brands fa-whatsapp me-3 text-accent"></i> + 91 - 9305059906.</p>
+                    <p class="mb-3"><i class="fa-solid fa-phone-volume me-3 text-accent"></i>{{ $contact->phone ?? '' }}
+                    </p>
+                    <p class="mb-4"><i class="fa-brands fa-whatsapp me-3 text-accent"></i>{{ $contact->whatsapp ?? '' }}
+                    </p>
+                    <p class="mb-3">
+                        <i class="fa-solid fa-envelope me-3 text-accent"></i>
+                        {{ $contact->email ?? '' }}
+                    </p>
 
-                    <p class="small text-white-75 mb-3">Chowk, Lucknow Uttar Pradesh, India - 226003</p>
+                    <p class="small text-white-75 mb-3">{{ $contact->address ?? '' }}</p>
 
                     <!-- Simple Newsletter (premium touch) -->
                     <form class="mt-4">
@@ -180,7 +193,8 @@
     </footer>
 
     <!-- STICKY WHATSAPP -->
-    <a href="https://wa.me/+ 91 - 9838457702" target="_blank" class="sticky-whatsapp">
+    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contact->whatsapp ?? '') }}" target="_blank"
+        class="sticky-whatsapp">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
@@ -226,57 +240,22 @@
             }
         }
 
-        // Gallery Images
-        function populateGallery() {
-            const images = [
-                "https://picsum.photos/id/1015/600/600",
-                "https://picsum.photos/id/201/600/600",
-                "https://picsum.photos/id/870/600/600",
-                "https://picsum.photos/id/29/600/600",
-                "https://picsum.photos/id/160/600/600",
-                "https://picsum.photos/id/251/600/600",
-                "https://picsum.photos/id/314/600/600",
-                "https://picsum.photos/id/401/600/600"
-            ];
 
-            const grid = document.getElementById('galleryGrid');
-            images.forEach((src, index) => {
-                const div = document.createElement('div');
-                div.className = `col-md-6 col-lg-3 gallery-img`;
-                div.innerHTML = `
-                    <img src="${src}" class="img-fluid w-100" style="height:280px; object-fit:cover;" alt="Party ${index + 1}">
-                `;
-                div.onclick = () => {
-                    document.getElementById('modalImage').src = src;
-                    new bootstrap.Modal(document.getElementById('galleryModal')).show();
-                };
-                grid.appendChild(div);
-            });
-        }
-
-        // Form Validation + Success
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            e.preventDefault();
+        document.getElementById('contactForm').addEventListener('submit', function () {
 
             const name = document.getElementById('name').value.trim();
             const phone = document.getElementById('phone').value.trim();
 
             if (name === '' || phone === '') {
                 alert("Please fill name and phone number ✨");
+                event.preventDefault(); // stop only if invalid
                 return;
             }
 
             const btn = this.querySelector('button');
-            const originalText = btn.textContent;
-            btn.innerHTML = `<i class="fa-solid fa-sparkles fa-spin"></i> Sending Magic...`;
+            btn.innerHTML = `<i class="fa fa-spinner fa-spin"></i> Sending...`;
             btn.disabled = true;
 
-            setTimeout(() => {
-                alert("🎉 Thank you! Our magician will call you within 5 minutes.");
-                this.reset();
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            }, 1800);
         });
 
         // Scroll Top Button
@@ -305,7 +284,6 @@
         // Initialize everything
         window.onload = function () {
             createSparkles();
-            populateGallery();
             handleScrollTop();
 
             // Navbar active link highlight on scroll (bonus)
@@ -332,6 +310,12 @@
             // Auto carousel already handled by Bootstrap
             console.log('%c✨ Magician Badshah Homepage Loaded Successfully ✨', 'color:#e91e63; font-size:14px; font-weight:bold;');
         };
+    </script>
+    <script>
+        function openGalleryModal(src) {
+            document.getElementById('modalImage').src = src;
+            new bootstrap.Modal(document.getElementById('galleryModal')).show();
+        }
     </script>
 </body>
 

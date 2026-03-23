@@ -44,7 +44,7 @@
     <div class="container-fluid">
       <div class="top-main-header d-flex align-items-center">
         <div class="admin-logo">
-          <img src="{{ asset('images/bayepurbazaar-logo.jpeg') }}">
+          Magician Badshah
         </div>
         <div class="ml-auto">
 

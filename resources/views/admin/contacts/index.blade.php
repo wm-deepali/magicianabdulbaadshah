@@ -44,9 +44,9 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Mobile</th>
-                                    <th>Email</th>
-                                    <th>Subject</th>
+                                    <th>Phone</th>
+                                    <th>Event Type</th>
+                                    <th>Event Date</th>
                                     <th>Message</th>
                                     <th>Date</th>
                                     <th width="100">Action</th>
@@ -64,11 +64,11 @@
 
                                         <td>{{ $contact->name }}</td>
 
-                                        <td>{{ $contact->mobile }}</td>
+                                        <td>{{ $contact->phone }}</td>
 
-                                        <td>{{ $contact->email }}</td>
+                                        <td>{{ optional($contact->service)->title }}</td>
 
-                                        <td>{{ $contact->subject }}</td>
+                                        <td>{{ $contact->event_date }}</td>
 
                                         <td style="max-width:250px">
                                             {{ $contact->message }}

@@ -1,7 +1,7 @@
 
         :root {
             --primary: #e91e63;
-            --accent: #ffd700;
+            --accent: #B52222;
             --dark: #1a0033;
         }
         
@@ -299,14 +299,14 @@ footer {
     position: relative;
 }
 
-.logo {
+/* .logo {
     font-family: 'Playfair Display', serif;
     background: linear-gradient(90deg, var(--accent), #fff, var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 200% auto;
     animation: shine 8s linear infinite;
-}
+} */
 
 .hover-lift:hover {
     transform: translateY(-4px);
@@ -349,4 +349,161 @@ hr {
 }
 .list-unstyled li a{
     color: #fff;
+}
+
+/* Enhanced Glossy & Premium Services Cards */
+.service-card {
+    transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    border: 1px solid rgba(255, 202, 40, 0.12);
+    background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(194,24,91,0.04));
+}
+
+.service-card:hover {
+    transform: translateY(-14px) scale(1.04);
+    box-shadow: 0 30px 80px rgba(194, 24, 91, 0.4), 0 0 40px rgba(255, 202, 40, 0.15) inset !important;
+    border-color: rgba(255, 202, 40, 0.4);
+}
+
+.gloss-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%, rgba(255,255,255,0.08) 100%);
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.service-card:hover .gloss-overlay {
+    opacity: 0.9;
+    background: linear-gradient(135deg, rgba(255,202,40,0.25) 0%, transparent 60%, rgba(194,24,91,0.15) 100%);
+}
+
+.service-list li {
+    margin-bottom: 0.65rem;
+    padding-left: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.service-list i {
+    font-size: 0.8rem;
+}
+
+.hover-glow:hover {
+    filter: brightness(1.05);
+}
+
+/* Gallery - Fixed Size Cards + Visible Tabs */
+.gallery-card, .video-card {
+    height: 100%;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255,202,40,0.08);
+}
+
+.gallery-card:hover, .video-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(194,24,91,0.35);
+    border-color: var(--accent);
+}
+
+.image-wrapper {
+    height: 240px;          /* Fixed height for all image cards */
+    overflow: hidden;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* Ensures uniform size without distortion */
+    transition: transform 0.6s ease;
+}
+
+.gallery-card:hover .image-wrapper img {
+    transform: scale(1.08);
+}
+
+.tab-btn {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: #000;
+    font-weight: 600;
+    padding: 14px 40px;
+    transition: all 0.3s;
+}
+
+.tab-btn.active {
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+    color: #ffffff;
+    box-shadow: 0 8px 30px rgba(194,24,91,0.5);
+}
+
+.tab-btn:hover:not(.active) {
+    background: rgba(255,202,40,0.15);
+    color: var(--accent);
+}
+
+.overlay, .play-overlay {
+    background: rgba(10,0,20,0.55);
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.gallery-card:hover .overlay,
+.video-card:hover .play-overlay {
+    opacity: 1;
+}
+
+.drop-shadow {
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.6));
+}
+
+/* Mobile adjustments */
+@media (max-width: 576px) {
+    .image-wrapper { height: 200px; }
+    .tab-btn { padding: 12px 30px; font-size: 1rem; }
+}
+
+/* Contact - Light Gray Borders + Fixed Layout */
+.border-gray {
+    border-color: #6c757d !important; /* light gray visible border */
+}
+
+.form-control, .form-select {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid #6c757d !important;
+    color: #202020 !important; /* off-white, not pure white */
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 0.25rem rgba(255,202,40,0.2) !important;
+}
+
+.form-control::placeholder, .form-select option {
+    color: #adb5bdb0 !important; /* lighter gray placeholder */
+    font-size: 15px;
+}
+
+.map-wrapper {
+    min-height: 450px;
+}
+
+.contact-details p {
+    font-size: 1.1rem;
+    color: #000 !important; /* muted off-white */
+}
+
+.contact-details i {
+    width: 35px;
+    text-align: center;
+}
+
+/* Validation */
+.was-validated .form-control:valid, .was-validated .form-select:valid {
+    border-color: #28a745 !important;
+}
+
+.was-validated .form-control:invalid, .was-validated .form-select:invalid {
+    border-color: #dc3545 !important;
 }
