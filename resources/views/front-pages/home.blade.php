@@ -15,7 +15,7 @@
                 @forelse($sliders as $index => $slider)
 
                     <div class="carousel-item {{ $index == 0 ? 'active' : '' }}"
-                        style="background-image: url('{{ asset('storage/' . $slider->image) }}');">
+                        style="background-image: url('{{ asset('public/storage/' . $slider->image) }}');">
 
                         <div class="hero-overlay position-absolute w-100 h-100 d-flex align-items-center">
                             <div class="container text-white">
@@ -100,7 +100,7 @@
                 <div class="col-lg-6">
                     <div class="position-relative">
 
-                        <img src="{{ asset('storage/' . ($about->image ?? '')) }}" class="img-fluid rounded-4 shadow-lg">
+                        <img src="{{ asset('public/storage/' . ($about->image ?? '')) }}" class="img-fluid rounded-4 shadow-lg">
 
                         <div class="position-absolute bottom-0 start-0 bg-white p-4 rounded-4 shadow glass m-4">
                             <h4 class="text-primary mb-0">
@@ -234,9 +234,9 @@
                 @forelse($images as $index => $image)
 
                     <div class="col-md-6 col-lg-3 gallery-img"
-                        onclick="openGalleryModal('{{ asset('storage/' . $image->image) }}')">
+                        onclick="openGalleryModal('{{ asset('public/storage/' . $image->image) }}')">
 
-                        <img src="{{ asset('storage/' . $image->image) }}" class="img-fluid w-100"
+                        <img src="{{ asset('public/storage/' . $image->image) }}" class="img-fluid w-100"
                             style="height:280px; object-fit:cover;" alt="Gallery {{ $index + 1 }}">
                     </div>
 

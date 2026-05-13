@@ -46,7 +46,7 @@
                         <td>{{ $slider->id }}</td>
 
                         <td>
-                            <img src="{{ asset('storage/' . $slider->image) }}"
+                            <img src="{{ asset('public/storage/' . $slider->image) }}"
                                  width="100">
                         </td>
 

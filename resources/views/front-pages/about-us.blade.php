@@ -20,7 +20,7 @@
                 <!-- Left: Image Card -->
                 <div class="col-lg-6">
                     <div class="glass rounded-4 overflow-hidden h-100 shadow-lg position-relative">
-                        <img src="{{ $about->image ? asset('storage/'. $about->image) : '' }}"
+                        <img src="{{ $about->image ? asset('public/storage/'. $about->image) : '' }}"
                             class="img-fluid w-100 h-100 object-fit-cover" alt="{{ $about->title ?? '' }}"
                             style="min-height: 500px;">
                         <!-- Optional subtle overlay text on image -->

@@ -54,7 +54,7 @@
 
                         <div class="form-group mt-3">
                             <label>Current Image</label><br>
-                            <img src="{{ asset('storage/' . $image->image) }}"
+                            <img src="{{ asset('public/storage/' . $image->image) }}"
                                 width="120" style="border-radius:6px;">
                         </div>
 

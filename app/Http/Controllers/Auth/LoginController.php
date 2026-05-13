@@ -13,29 +13,45 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    // ✅ Show Login Page
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
+    // ✅ Handle Login
     public function login(Request $request)
     {
+        // ✅ Validation
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
-     
 
-        if (Auth::attempt($request->only('email', 'password'))) {
+        // ✅ Attempt Login (with remember option)
+        if (Auth::attempt(
+            $request->only('email', 'password'),
+            $request->filled('remember')
+        )) {
             $request->session()->regenerate();
 
-            if (auth()->user()) {
-                return redirect()->to('admin/dashboard');
-            }
-
-            return redirect()->to('/login');
+            return redirect()->to('admin/dashboard');
         }
 
-        return back()->with('error', 'Email-Address And Password Are Wrong.');
+        // ❌ Login Failed
+        return back()
+            ->withInput($request->only('email', 'remember'))
+            ->with('error', 'Email or Password is incorrect.');
+    }
+
+    // ✅ Logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }

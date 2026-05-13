@@ -62,7 +62,7 @@
                         <!-- Current Image -->
                         <div class="form-group mt-3">
                             <label>Current Image</label><br>
-                            <img src="{{ asset('storage/' . $slider->image) }}"
+                            <img src="{{ asset('public/storage/' . $slider->image) }}"
                                 width="200" style="border-radius:8px;">
                         </div>
 

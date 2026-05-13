@@ -60,7 +60,7 @@
                                         <td>{{ $image->title ?? '-' }}</td>
 
                                         <td>
-                                            <img src="{{ asset('storage/' . $image->image) }}"
+                                            <img src="{{ asset('public/storage/' . $image->image) }}"
                                                 width="80" height="60"
                                                 style="object-fit:cover;border-radius:5px;">
                                         </td>

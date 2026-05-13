@@ -60,7 +60,7 @@
                         @if(!empty($service->image))
                             <div class="form-group mt-3">
                                 <label>Current Image</label><br>
-                                <img src="{{ asset('storage/' . $service->image) }}" width="120" style="border-radius:8px;">
+                                <img src="{{ asset('public/storage/' . $service->image) }}" width="120" style="border-radius:8px;">
                             </div>
                         @endif
 

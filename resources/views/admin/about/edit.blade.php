@@ -77,7 +77,7 @@
 
                             @if(!empty($about->image))
                                 <div class="mb-2">
-                                    <img src="{{ asset('storage/' . $about->image) }}"
+                                    <img src="{{ asset('public/storage/' . $about->image) }}"
                                         width="150" style="border-radius:8px;">
                                 </div>
                             @endif

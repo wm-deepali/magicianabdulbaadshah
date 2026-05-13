@@ -37,8 +37,8 @@
                             <div class="gallery-card glass rounded-4 overflow-hidden shadow-lg position-relative">
 
                                 <div class="image-wrapper">
-                                    <img src="{{ asset('storage/' . $image->image) }}" class="img-fluid"
-                                        alt="{{ $image->title }}" loading="lazy">
+                                    <img src="{{ asset('public/storage/' . $image->image ?? '') }}" class="img-fluid"
+                                        alt="{{ $image->title ?? ''}}" loading="lazy">
                                 </div>
 
                             </div>
@@ -71,7 +71,7 @@
                                 <div class="ratio ratio-16x9">
                                     @if($videoId)
                                         <img src="https://img.youtube.com/vi/{{ $videoId }}/hqdefault.jpg" class="img-fluid"
-                                            alt="{{ $video->title }}">
+                                            alt="{{ $video->title ?? ''}}">
                                     @else
                                         <div class="bg-dark text-white text-center p-5">
                                             Invalid Video
@@ -84,7 +84,7 @@
 
                                 <div class="p-4 text-center">
                                     <h5 class="fw-bold mb-2" style="color: var(--accent);">
-                                        {{ $video->title }}
+                                        {{ $video->title ?? ''}}
                                     </h5>
                                     <p class="text-white-75 small mb-0">
                                         {{ $video->description ?? '' }}

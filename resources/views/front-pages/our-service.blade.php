@@ -25,26 +25,26 @@
 
                             <!-- Image -->
                             <div class="card-image position-relative">
-                                <img src="{{ $service->image ? asset('storage/' . $service->image) : 'https://via.placeholder.com/400x300' }}"
-                                    class="img-fluid w-100" alt="{{ $service->title }}"
+                                <img src="{{ $service->image ? asset('public/storage/' . $service->image) : 'https://via.placeholder.com/400x300' }}"
+                                    class="img-fluid w-100" alt="{{ $service->title ?? ''}}"
                                     style="height: 280px; object-fit: cover;">
 
                                 <div class="gloss-overlay"></div>
 
                                 <div
                                     class="image-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
-                                    <i class="{{ $service->icon }} fa-4x text-white opacity-40"></i>
+                                    <i class="{{ $service->icon ?? ''}} fa-4x text-white opacity-40"></i>
                                 </div>
                             </div>
 
                             <!-- Content -->
                             <div class="p-2 p-lg-3 text-center">
                                 <h4 class="fw-bold mb-3 fs-4" style="color: var(--accent);">
-                                    {{ $service->title }}
+                                    {{ $service->title ?? ""}}
                                 </h4>
 
                                 <p class="text-white-75 mb-4" style="font-size: 0.98rem; line-height: 1.5;">
-                                    {{ $service->description }}
+                                    {{ $service->description ?? ""}}
                                 </p>
 
                                 <!-- Features -->

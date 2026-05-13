@@ -20,7 +20,7 @@
   <link rel="stylesheet" type="text/css" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css">
   <!-- END STACK CSS-->
   <!-- BEGIN Page Level CSS-->
-  <link rel="stylesheet" type="text/css" href="{{ URL::asset('admin/css/datatable.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ URL::asset('public/admin/css/datatable.css') }}">
   <!-- END Page Level CSS-->
   <!-- BEGIN Custom CSS-->
   <!-- END Custom CSS-->
@@ -29,8 +29,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.10.4/sweetalert2.min.css">
   <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-  <link rel="stylesheet" type="text/css" href="{{ URL::asset('admin/custom/css/header.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ URL::asset('admin/custom/css/style.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ URL::asset('public/admin/custom/css/header.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ URL::asset('public/admin/custom/css/style.css') }}">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 

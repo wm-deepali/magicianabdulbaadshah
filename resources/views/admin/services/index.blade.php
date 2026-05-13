@@ -57,7 +57,7 @@
                                         <td>{{ $service->id }}</td>
                                         <td>
                                             @if($service->image)
-                                                <img src="{{ asset('storage/' . $service->image) }}" width="60" height="60"
+                                                <img src="{{ asset('public/storage/' . $service->image) }}" width="60" height="60"
                                                     style="object-fit:cover; border-radius:6px;">
                                             @else
                                                 <span class="text-muted">No Image</span>
