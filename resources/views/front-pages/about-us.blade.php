@@ -3,7 +3,7 @@
 @section('content')
 
     <!-- ABOUT US SECTION - Professional Layout: Left Image | Right Content -->
-    <section id="about" class="py-5 py-lg-6 bg-dark-2 position-relative overflow-hidden">
+   {{-- <section id="about" class="py-5 py-lg-6 bg-dark-2 position-relative overflow-hidden">
         <div class="container">
             <!-- Heading -->
             <div class="text-center mb-5 mb-lg-6">
@@ -81,7 +81,207 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
+
+<section id="about" class="magic-about-section">
+
+    <div class="container">
+
+        <!-- HEADING -->
+
+        <div class="magic-about-heading">
+
+            <span class="magic-about-tag">
+                About Us
+            </span>
+
+            <h2>
+                About <span>Magician Badshah</span>
+            </h2>
+
+            <p>
+                Where creativity meets perfection — crafting magical celebrations
+                and unforgettable moments since 2013.
+            </p>
+
+        </div>
 
 
+
+        <!-- MAIN CONTENT -->
+
+        <div class="row g-5 ">
+
+            <!-- IMAGE -->
+
+            <div class="col-lg-6">
+
+                <div class="magic-about-image-box">
+
+                    <img 
+                        src="{{ $about->image ? asset('public/storage/'. $about->image) : '' }}"
+                        alt="{{ $about->title ?? '' }}">
+
+                    <div class="magic-about-image-overlay">
+
+                        <h4>
+                            {{ $about->title ?? 'Luxury Event Planning' }}
+                        </h4>
+
+                        <p>
+                            {{ $about->description ?? 'Creating unforgettable experiences with creativity and elegance.' }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CONTENT -->
+
+         <div class="col-lg-6">
+
+    <div class="magic-about-content">
+
+        <h3>Our Story</h3>
+
+        <p>
+            {{ $about->story ?? '' }}
+        </p>
+
+
+
+        <!-- BUTTON -->
+
+        <a href="#contact" class="magic-about-btn">
+
+            {{ $about->button_text ?? "Let's Create Your Magic" }}
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+</div>
+            
+        </div>
+        
+
+        <!-- MISSION & VISION ROW -->
+
+        <div class="row mt-4">
+
+            <!-- MISSION -->
+
+            <div class="col-md-6">
+
+                <div class="mission-box magic-about-content">
+
+                    <h4>Our Mission</h4>
+
+                    <p>
+                        {{ $about->mission ?? '' }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- VISION -->
+
+            <div class="col-md-6">
+
+                <div class="vision-box magic-about-content">
+
+                    <h4>Our Vision</h4>
+
+                    <p>
+                        {{ $about->vision ?? '' }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- STATS -->
+
+        <div class="magic-about-stats">
+
+            <div class="row g-4">
+
+                <!-- YEARS -->
+
+                <div class="col-md-4">
+
+                    <div class="magic-stat-card">
+
+                        <div class="magic-stat-number counter"
+                            data-target="{{ preg_replace('/[^0-9]/', '', $about->years ?? '20') }}">
+
+                            0
+
+                        </div>
+
+                        <p>Years of Excellence</p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EVENTS -->
+
+                <div class="col-md-4">
+
+                    <div class="magic-stat-card">
+
+                        <div class="magic-stat-number counter"
+                            data-target="{{ preg_replace('/[^0-9]/', '', $about->events ?? '1200') }}">
+
+                            0
+
+                        </div>
+
+                        <p>Events Curated</p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUCCESS -->
+
+                <div class="col-md-4">
+
+                    <div class="magic-stat-card">
+
+                        <div class="magic-stat-number counter"
+                            data-target="{{ preg_replace('/[^0-9]/', '', $about->success_rate ?? '98') }}">
+
+                            0
+
+                        </div>
+
+                        <p>Client Happiness</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 @endsection

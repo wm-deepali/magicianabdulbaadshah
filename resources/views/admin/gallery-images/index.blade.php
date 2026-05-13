@@ -122,20 +122,34 @@
             if (result.isConfirmed) {
 
                 $.ajax({
-                    url: "{{ url('admin/gallery-images') }}/" + id,
-                    type: "DELETE",
-                    data: {
-                        _token: "{{ csrf_token() }}"
-                    },
-                    success: function (res) {
+    url: "{{ url('admin/gallery-images') }}/" + id,
+    type: "DELETE",
+    data: {
+        _token: "{{ csrf_token() }}"
+    },
 
-                        Swal.fire('Deleted!', res.message ?? 'Deleted successfully', 'success');
+    success: function (res) {
 
-                        $("#row" + id).fadeOut(400, function () {
-                            $(this).remove();
-                        });
-                    }
-                });
+        Swal.fire(
+            'Deleted!',
+            res.message ?? 'Deleted successfully',
+            'success'
+        );
+
+        $("#row" + id).fadeOut(400, function () {
+            $(this).remove();
+        });
+    },
+
+    error: function () {
+
+        Swal.fire(
+            'Error!',
+            'Something went wrong.',
+            'error'
+        );
+    }
+});
 
             }
 

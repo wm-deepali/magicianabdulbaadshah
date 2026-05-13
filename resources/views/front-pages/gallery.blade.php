@@ -16,16 +16,36 @@
             </div>
 
             <!-- Centered Tabs - Now clearly visible -->
-            <div class="d-flex justify-content-center mb-5 mb-lg-6">
-                <div class="btn-group btn-group-lg shadow-lg rounded-pill overflow-hidden" role="group">
-                    <button type="button" class="btn tab-btn active px-5 py-3" data-tab="images">
-                        <i class="fa-solid fa-images me-2"></i> Images
-                    </button>
-                    <button type="button" class="btn tab-btn px-5 py-3" data-tab="videos">
-                        <i class="fa-solid fa-video me-2"></i> Videos
-                    </button>
-                </div>
-            </div>
+            <!-- CENTER TABS -->
+
+<div class="d-flex justify-content-center mb-5">
+
+    <div class="gallery-tabs">
+
+        <button type="button"
+            class="btn tab-btn active"
+            data-tab="images">
+
+            <i class="fa-solid fa-images"></i>
+
+            Images
+
+        </button>
+
+
+        <button type="button"
+            class="btn tab-btn"
+            data-tab="videos">
+
+            <i class="fa-solid fa-video"></i>
+
+            Videos
+
+        </button>
+
+    </div>
+
+</div>
 
             <!-- Images Tab (Default) -->
             <div id="images-tab" class="gallery-tab active">

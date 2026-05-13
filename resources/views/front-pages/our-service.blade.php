@@ -3,79 +3,101 @@
 @section('content')
 
     <!-- SERVICES SECTION - Fixed Spacing, Visible Yellow/Gold, Premium Glossy Look -->
-    <section id="services" class="py-5 py-lg-6 bg-dark-2 position-relative overflow-hidden">
-        <div class="container position-relative z-2">
-            <!-- Heading -->
-            <div class="text-center mb-5 mb-lg-6">
-                <h2 class="section-title display-4 fw-bold mb-3">
-                    Our <span style="color: var(--accent);">Signature</span> Services
-                </h2>
-                <p class="lead text-white-75 mx-auto" style="max-width: 760px;">
-                    Premium theme creations, breathtaking balloon artistry & unforgettable party experiences
-                </p>
+  
+    <section id="services" class="section-padding bg-light">
+  <div class="container">
+
+    <!-- Heading -->
+    <div class="text-center mb-5" data-aos="fade-up">
+      <span class="section-tag">What We Offer</span>
+      <h2 class="section-title text-dark">Our Magical Services</h2>
+      <p class="text-secondary">Tailored entertainment experiences for every special occasion</p>
+    </div>
+
+    <!-- Services -->
+    
+    <div class="row g-4">
+
+      @forelse($services as $index => $service)
+
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="{{ ($index+1)*100 }}">
+
+          <div class="service-card">
+
+            <!-- IMAGE -->
+            <div>
+              <img 
+                src="{{ $service->image 
+                      ? asset('public/storage/' . ltrim($service->image, '/')) 
+                      : asset('assets/images/balloons-3.png') }}" 
+                class="text-center d-block mx-auto img-fluid"
+                alt="{{ $service->title ?? '' }}"
+                style="height:120px; object-fit:contain;">
             </div>
 
-            <!-- Services Grid - Larger Cards -->
-            <div class="row g-4 g-lg-3">
+            <!-- TITLE -->
+            <h3>{{ $service->title ?? 'Service Title' }}</h3>
 
-                @foreach($services as $service)
+            <!-- DESCRIPTION (optional) -->
+            @if(!empty($service->description))
+              <p class="text-secondary small">
+                {{ \Illuminate\Support\Str::limit($service->description, 80) }}
+              </p>
+            @endif
+            
+            @if(!empty($service->features) && is_array($service->features))
 
-                    <div class="col-lg-4 col-md-6">
-                        <div class="service-card glass rounded-4 overflow-hidden h-100 shadow-xl position-relative hover-glow">
+    <div class="mt-2 mb-3 text-start">
 
-                            <!-- Image -->
-                            <div class="card-image position-relative">
-                                <img src="{{ $service->image ? asset('public/storage/' . $service->image) : 'https://via.placeholder.com/400x300' }}"
-                                    class="img-fluid w-100" alt="{{ $service->title ?? ''}}"
-                                    style="height: 280px; object-fit: cover;">
+        @foreach($service->features as $feature)
 
-                                <div class="gloss-overlay"></div>
+            @if(!empty(trim($feature)))
 
-                                <div
-                                    class="image-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
-                                    <i class="{{ $service->icon ?? ''}} fa-4x text-white opacity-40"></i>
-                                </div>
-                            </div>
+                <div class="small mb-1">
+                    <i class="fa fa-check text-success me-1"></i>
+                    {{ trim($feature) }}
+                </div>
 
-                            <!-- Content -->
-                            <div class="p-2 p-lg-3 text-center">
-                                <h4 class="fw-bold mb-3 fs-4" style="color: var(--accent);">
-                                    {{ $service->title ?? ""}}
-                                </h4>
+            @endif
 
-                                <p class="text-white-75 mb-4" style="font-size: 0.98rem; line-height: 1.5;">
-                                    {{ $service->description ?? ""}}
-                                </p>
+        @endforeach
 
-                                <!-- Features -->
-                                <ul class="list-unstyled text-start mb-0 small text-white-75 ps-0 service-list">
+    </div>
 
-                                    @if(!empty($service->features))
-                                        @foreach($service->features as $feature)
-                                            <li>
-                                                <i class="fa-solid fa-star me-2" style="color: var(--accent);"></i>
-                                                {{ $feature }}
-                                            </li>
-                                        @endforeach
-                                    @endif
+@endif
 
-                                </ul>
-                            </div>
+            <!-- BUTTON -->
+            <a href="{{ url('/') }}#contact" class="btn btn-sm btn-primary-custom">
+              Book This Show
+            </a>
 
-                        </div>
-                    </div>
+          </div>
 
-                @endforeach
-
-            </div>
-
-            <!-- CTA -->
-            <div class="text-center mt-5 mt-lg-6">
-                <a href="{{ url('/') }}#contact" class="btn magic-btn btn-lg px-5 py-3">
-                    <i class="fa-solid fa-wand-magic-sparkles me-2"></i> Book Your Magical Celebration
-                </a>
-            </div>
         </div>
-    </section>
+
+      @empty
+
+        <!-- FALLBACK STATIC (your original design) -->
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card">
+            <div>
+              <img src="{{ asset('assets/images/balloons-3.png') }}" class="d-block mx-auto">
+            </div>
+            <h3>Birthday Parties</h3>
+            <a href="#contact" class="btn btn-sm btn-primary-custom">Book This Show</a>
+          </div>
+        </div>
+
+      @endforelse
+
+    </div>
+
+    <!-- VIEW MORE -->
+    <div class="text-center mt-5">
+      <a href="{{ route('services') }}" class="section-tag">View More</a>
+    </div>
+
+  </div>
+</section>
 
 @endsection

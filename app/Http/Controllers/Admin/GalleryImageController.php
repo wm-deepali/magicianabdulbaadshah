@@ -23,23 +23,30 @@ class GalleryImageController extends Controller
     }
 
     // Store image
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'nullable|string|max:255',
-            'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
-        ]);
+   public function store(Request $request)
+{
+    $request->validate([
+        'titles.*' => 'nullable|string|max:255',
+        'images.*' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+    ]);
 
-        $path = $request->file('image')->store('gallery/images', 'public');
+    if ($request->hasFile('images')) {
 
-        GalleryImage::create([
-            'title' => $request->title,
-            'image' => $path,
-        ]);
+        foreach ($request->file('images') as $index => $image) {
 
-        return redirect()->route('admin.gallery-images.index')
-            ->with('success', 'Image added successfully');
+            $path = $image->store('gallery/images', 'public');
+
+            GalleryImage::create([
+                'title' => $request->titles[$index] ?? null,
+                'image' => $path,
+            ]);
+        }
     }
+
+    return redirect()
+        ->route('admin.gallery-images.index')
+        ->with('success', 'Images added successfully');
+}
 
     // Show edit form
     public function edit($id)
@@ -77,19 +84,24 @@ class GalleryImageController extends Controller
     }
 
     // Delete image
-    public function destroy($id)
-    {
-        $image = GalleryImage::findOrFail($id);
+   public function destroy($id)
+{
+    $image = GalleryImage::findOrFail($id);
 
-        if ($image->image && Storage::disk('public')->exists($image->image)) {
-            Storage::disk('public')->delete($image->image);
-        }
+    // DELETE IMAGE FROM STORAGE
+    if ($image->image && Storage::disk('public')->exists($image->image)) {
 
-        $image->delete();
-
-        return redirect()->route('admin.gallery-images.index')
-            ->with('success', 'Image deleted successfully');
+        Storage::disk('public')->delete($image->image);
     }
+
+    // DELETE RECORD
+    $image->delete();
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Image deleted successfully'
+    ]);
+}
 
     // (optional) Show single image
     public function show($id)
